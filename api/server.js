@@ -24,7 +24,16 @@ async function gmailSend({name,email,phone,topic,message,consent,type}){
 }
 http.createServer(async(req,res)=>{
  const origin=req.headers.origin||'';
- if(req.url==='/health'){return reply(res,200,{ok:true,configured:Boolean(process.env.GOOGLE_REFRESH_TOKEN)},origin===ORIGIN?origin:ORIGIN)}
+ if(req.url==='/health'){return reply(res,200,{ok:true,configured:['GOOGLE_CLIENT_ID','GOOGLE_CLIENT_SECRET','GOOGLE_REFRESH_TOKEN'].every(k=>Boolean(process.env[k]))},origin===ORIGIN?origin:ORIGIN)}
+ if(req.url==='/health/oauth'){
+  if(!['GOOGLE_CLIENT_ID','GOOGLE_CLIENT_SECRET','GOOGLE_REFRESH_TOKEN'].every(k=>Boolean(process.env[k])))return reply(res,503,{ok:false,stage:'configuration',error:'OAuth environment values missing'},ORIGIN);
+  try{
+   const form=new URLSearchParams({client_id:process.env.GOOGLE_CLIENT_ID,client_secret:process.env.GOOGLE_CLIENT_SECRET,refresh_token:process.env.GOOGLE_REFRESH_TOKEN,grant_type:'refresh_token'});
+   const response=await fetch('https://oauth2.googleapis.com/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:form});
+   if(!response.ok){console.error('OAuth validation failed, HTTP',response.status);return reply(res,503,{ok:false,stage:'google_authorization',error:'Google rejected OAuth credentials or refresh token'},ORIGIN)}
+   return reply(res,200,{ok:true,stage:'google_authorization',message:'Google issued an access token. Gmail delivery not yet tested.'},ORIGIN);
+  }catch{ return reply(res,503,{ok:false,stage:'network',error:'Unable to contact Google OAuth'},ORIGIN)}
+ }
  if(req.url!=='/api/contact'){return reply(res,404,{error:'Not found'},ORIGIN)}
  if(origin!==ORIGIN){return reply(res,403,{error:'Origin not allowed'},ORIGIN)}
  if(req.method==='OPTIONS'){res.writeHead(204,{'Access-Control-Allow-Origin':ORIGIN,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type','Access-Control-Max-Age':'3600'});return res.end()}
