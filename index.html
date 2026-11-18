@@ -506,7 +506,7 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
 </script><script>
 for (const image of document.querySelectorAll('.project-homepage-image')) {
  const showHomepage = () => {
-  image.parentElement.classList.toggle('has-homepage-image', image.naturalWidth > 0);
+  image.parentElement.classList.toggle('has-homepage-image', image.complete && image.naturalWidth > 0);
  };
  image.addEventListener('load', showHomepage);
  image.addEventListener('error', showHomepage);
