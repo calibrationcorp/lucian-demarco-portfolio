@@ -36,8 +36,8 @@ body[data-theme="miami"] h2,body[data-theme="miami"] h3{letter-spacing:.06em!imp
 body[data-theme="nordic"] h2,body[data-theme="nordic"] h3{letter-spacing:.06em!important;text-transform:uppercase;font-weight:700!important}
 body[data-theme="miami"] .eyebrow,body[data-theme="miami"] .num,body[data-theme="miami"] .stats strong,body[data-theme="miami"] .card a,body[data-theme="miami"] .gallery-copy a{color:#ffe44d!important}
 body[data-theme="nordic"] .eyebrow,body[data-theme="nordic"] .num,body[data-theme="nordic"] .stats strong,body[data-theme="nordic"] .card a,body[data-theme="nordic"] .gallery-copy a{color:#fecc02!important}
-body[data-theme="miami"] .visual{background:radial-gradient(ellipse at 50% 36%,#ffda50 0 15%,#ff5984 30%,transparent 31%),linear-gradient(160deg,#31166c,#120a35)!important;box-shadow:inset 0 0 75px #ff3b8c55,0 0 32px #00fff044}
-body[data-theme="nordic"] .visual{background:radial-gradient(ellipse at 50% 36%,#fecc02 0 15%,#af9d42 30%,transparent 31%),linear-gradient(160deg,#075082,#071d35)!important;box-shadow:inset 0 0 75px #fecc0240,0 0 32px #2ca6ef44}
+body[data-theme="miami"] .visual{background:radial-gradient(ellipse at 72% 30%,#ffda50 0 12%,#ff5984 24%,transparent 25%),linear-gradient(160deg,#31166c,#120a35)!important;box-shadow:inset 0 0 75px #ff3b8c55,0 0 32px #00fff044}
+body[data-theme="nordic"] .visual{background:radial-gradient(ellipse at 72% 30%,#fecc02 0 12%,#af9d42 24%,transparent 25%),linear-gradient(160deg,#075082,#071d35)!important;box-shadow:inset 0 0 75px #fecc0240,0 0 32px #2ca6ef44}
 body[data-theme="miami"] .visual:before{border-color:#00fff0!important;box-shadow:0 0 18px #00fff088}
 body[data-theme="nordic"] .visual:before{border-color:#69c6ff!important;box-shadow:0 0 18px #69c6ff66}
 body[data-theme="miami"] .visual:after{border-color:#ff3d91!important}
@@ -262,6 +262,17 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
   }
   context.setLineDash([]);
   context.lineDashOffset = 0;
+  const mist = context.createRadialGradient(280,402,4,280,402,68);
+  mist.addColorStop(0,color);
+  mist.addColorStop(1,'transparent');
+  context.save();
+  context.translate(280,402);
+  context.scale(1,.25);
+  context.translate(-280,-402);
+  context.fillStyle = mist;
+  context.globalAlpha = .32;
+  context.fillRect(212,334,136,136);
+  context.restore();
   for (let ring = 0; ring < 4; ring++) {
    const spread = (time / 3200 + ring / 4) % 1;
    context.globalAlpha = .75 * (1-spread);
