@@ -75,9 +75,9 @@ body[data-theme="nordic"] .gridmint-bars i{background:#69c6ff}</style><style id=
 .service-details>summary:focus-visible{outline:2px solid var(--gold,#ffcc00);outline-offset:4px}
 </style><style>.computing-preview{height:100%;min-height:260px;padding:30px;background:radial-gradient(circle at 85% 25%,#204b70,transparent 48%),linear-gradient(140deg,#07101b,#12233b);display:flex;flex-direction:column;justify-content:space-between;color:#e9f5ff}.computing-preview small{letter-spacing:.22em;color:#84c8ef;font-weight:700}.computing-preview strong{font:clamp(23px,3vw,39px)/1.1 Georgia,serif}.computing-preview>span{font-size:10px;letter-spacing:.13em;color:#b2c8dc}.computing-nodes{display:flex;gap:9px;flex-wrap:wrap}.computing-nodes i{font-style:normal;font-size:10px;letter-spacing:.1em;border:1px solid #4386a6;padding:6px 10px;border-radius:6px;color:#a7e4ff}</style><style>
 .hero{position:relative;isolation:isolate}
-.coastal-scene{position:absolute;inset:0 0 0 auto;width:min(65%,850px);height:100%;z-index:-1;pointer-events:none;opacity:.52;--palm-glow:#a9ccff;--bird-glow:#efffbd}
-body[data-theme="miami"] .coastal-scene{--palm-glow:#ff6ac0;--bird-glow:#65ffef}
-body[data-theme="nordic"] .coastal-scene{--palm-glow:#88d3ff;--bird-glow:#fecc02}
+.coastal-scene{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.52;--palm-glow:#a9ccff;--bird-glow:#efffbd;--water-glow:#62beff}
+body[data-theme="miami"] .coastal-scene{--palm-glow:#ff6ac0;--bird-glow:#65ffef;--water-glow:#38edff}
+body[data-theme="nordic"] .coastal-scene{--palm-glow:#88d3ff;--bird-glow:#fecc02;--water-glow:#58aaff}
 @media(max-width:760px){.coastal-scene{width:100%;opacity:.32}}
 </style><style>
 .project-homepage::after{content:"PROJECT PREVIEW"}
@@ -202,13 +202,68 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
   const palm = colors.getPropertyValue('--palm-glow').trim();
   const bird = colors.getPropertyValue('--bird-glow').trim();
   context.lineCap = 'round';
+  drawWaterfall(time, colors.getPropertyValue('--water-glow').trim());
+  context.save();
+  context.translate(108, 0);
+  drawPalm(palm, Math.sin(time / 2350) * 6);
+  context.restore();
+  context.save();
+  context.translate(274, 157);
+  context.scale(-.49, .65);
+  drawPalm(palm, Math.sin(time / 2350 + 1.2) * 7);
+  context.restore();
+  context.save();
+  context.translate(34, 0);
+  context.strokeStyle = context.shadowColor = bird;
+  context.shadowBlur = 10;
+  context.lineWidth = 1.6;
+  context.globalAlpha = .86;
+  for (const [index,[x,y,size]] of [[482,60,1],[530,106,.75],[449,142,.63]].entries()) {
+   const phase = time / 1200 + index * 1.2;
+   const wing = (7 + Math.sin(phase * 2.5) * 5) * size;
+   const px = x + Math.sin(phase * .45) * 14, py = y + Math.sin(phase) * 4;
+   curve(px-24*size,py-wing,[[px-13*size,py-wing*1.5,px-5*size,py-wing,px,py],[px+6*size,py-wing,px+14*size,py-wing*1.5,px+24*size,py-wing]]);
+  }
+  context.restore();
+ }
+ function drawWaterfall(time, color) {
+  context.save();
+  context.strokeStyle = context.shadowColor = color;
+  context.globalAlpha = .30;
+  context.shadowBlur = 9;
+  context.lineWidth = 1.6;
+  curve(225,152,[[244,147,251,154,268,151],[282,148,308,142,333,145]]);
+  context.shadowBlur = 0;
+  for (let stream = 0; stream < 15; stream++) {
+   const x = 247 + stream * 4.8;
+   const y = 151 - stream * .35;
+   const drift = (stream - 7) * 1.5;
+   context.globalAlpha = .13 + (stream % 4) * .06;
+   context.lineWidth = 1 + (stream % 3) * .45;
+   context.setLineDash([8 + stream % 5 * 4, 7 + stream % 4 * 3]);
+   context.lineDashOffset = -((time * (.038 + stream % 3 * .013) + 7 * stream) % 300);
+   curve(x,y,[[x+3,y+23,x-4,236,x+drift*.35,295],[x+drift*.6,334,x+drift,383,x+drift*1.5,403]]);
+  }
+  context.setLineDash([]);
+  context.lineDashOffset = 0;
+  for (let ring = 0; ring < 4; ring++) {
+   const spread = (time / 3200 + ring / 4) % 1;
+   context.globalAlpha = .25 * (1-spread);
+   context.lineWidth = 1.25;
+   context.beginPath();
+   context.ellipse(280,407,22+83*spread,3+13*spread,0,0,2*Math.PI);
+   context.stroke();
+  }
+  context.restore();
+ }
+ function drawPalm(palm, sway) {
   context.strokeStyle = context.shadowColor = palm;
-  const [cx, cy] = crown;
+  const [cx, cy] = [crown[0] + sway, crown[1]];
   context.shadowBlur = 8;
   context.globalAlpha = .78;
   context.lineWidth = 2;
-  const leftTrunk = [406,450,357,351,316,237,330,120];
-  const rightTrunk = [431,450,370,350,332,237,346,120];
+  const leftTrunk = [406,450,357,351,316+sway*.45,237,330+sway,120];
+  const rightTrunk = [431,450,370,350,332+sway*.45,237,346+sway,120];
   for (const [x,y,...controls] of [leftTrunk,rightTrunk]) curve(x,y,[controls]);
   context.globalAlpha = .44;
   context.lineWidth = .9;
@@ -218,10 +273,13 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
     [point(x,a,c,e,t),point(y,b,d,f,t)]);
    curve(lx,ly,[[lx+5,ly+4,rx-4,ry+4,rx,ry]]);
   }
-  for (const [ax,ay,bx,by,ex,ey] of fronds) {
+  for (const [a,ay,b,by,e,ey] of fronds) {
+   const ax = a+sway, bx = b+sway*1.25, ex = e+sway*1.5;
+   context.shadowBlur = 5;
    context.globalAlpha = .82;
    context.lineWidth = 1.8;
    curve(cx,cy,[[ax,ay,bx,by,ex,ey]]);
+   context.shadowBlur = 0;
    context.globalAlpha = .60;
    context.lineWidth = .95;
    for (let leaflet = 1; leaflet <= 12; leaflet++) {
@@ -248,16 +306,6 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
   curve(cx-60,cy,[[cx-15,cy,cx+15,cy,cx+60,cy]]);
   curve(cx,cy-60,[[cx,cy-15,cx,cy+15,cx,cy+60]]);
   context.setLineDash([]);
-  context.strokeStyle = context.shadowColor = bird;
-  context.shadowBlur = 10;
-  context.lineWidth = 1.6;
-  context.globalAlpha = .86;
-  for (const [index,[x,y,size]] of [[482,60,1],[530,106,.75],[449,142,.63]].entries()) {
-   const phase = time / 1200 + index * 1.2;
-   const wing = (7 + Math.sin(phase * 2.5) * 5) * size;
-   const px = x + Math.sin(phase * .45) * 14, py = y + Math.sin(phase) * 4;
-   curve(px-24*size,py-wing,[[px-13*size,py-wing*1.5,px-5*size,py-wing,px,py],[px+6*size,py-wing,px+14*size,py-wing*1.5,px+24*size,py-wing]]);
-  }
  }
  let frame;
  function animate(time) {
