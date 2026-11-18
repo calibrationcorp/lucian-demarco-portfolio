@@ -86,8 +86,21 @@ body[data-theme="nordic"] .coastal-scene{--palm-glow:#88d3ff;--bird-glow:#fecc02
 .project-homepage.has-homepage-image .project-homepage-image{opacity:1}
 .atlas-preview{background:radial-gradient(ellipse at 83% 28%,#4b7048,transparent 60%),linear-gradient(140deg,#0b231d,#1c3830);color:#fff5d7}
 .atlas-preview small{color:#d7e4a8}
+</style><style id="hero-expanded-coastal-art">
+.hero{isolation:isolate;overflow:visible}
+.hero>.coastal-scene{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.82}
+.hero>div{position:relative;z-index:1}
+.hero h1,.hero .lead,.hero .eyebrow,.hero .actions{position:relative;z-index:2}
+.hero .visual{isolation:isolate}
+.hero .visual span{display:none}
+body[data-theme="miami"] .hero .visual{background:radial-gradient(circle at 68% 36%,#ffea70 0%,#ff9a48 15%,#fa438b 26%,transparent 27%),linear-gradient(155deg,#251044,#110d37)!important}
+body[data-theme="nordic"] .hero .visual{background:radial-gradient(circle at 68% 36%,#fff4a8 0%,#ffcc02 15%,#d19a50 26%,transparent 27%),linear-gradient(155deg,#0b3151,#071c38)!important}
+.hero .visual::before{width:75%;height:40%;top:47%;left:12%;border:2px solid var(--accent)!important;border-radius:50%;transform:rotate(20deg);box-shadow:0 0 17px color-mix(in srgb,var(--accent) 35%,transparent)!important}
+.hero .visual::after{display:none}
+@media(max-width:800px){.hero>.coastal-scene{opacity:.5}.hero .visual{max-width:450px}}
+@media(prefers-reduced-motion:reduce){.hero>.coastal-scene{opacity:.65}}
 </style></head><body data-theme="miami"><header id="home" class="wrap top"><a class="brand" href="#home"><b>MD</b> Michael L. DeMarco</a><div class="theme-switcher" role="group" aria-label="Website appearance"><button type="button" id="theme-nordic" aria-pressed="false">☀ Nordic Calm</button><button type="button" id="theme-miami" aria-pressed="true">✦ Miami Neon</button></div><nav><a href="#work">Selected work</a><a href="#ventures">Ventures</a><a href="#profile">My story</a><a href="#contact">Contact</a></nav></header>
-<main><section class="wrap hero"><div><div class="eyebrow">A personal portfolio · A continuing body of work</div><h1>Michael L.<br><em>DeMarco.</em></h1><p class="lead">Vision, practical skill and determination—expressed through design, construction documentation, project delivery and digital innovation. I build ideas into useful work, connect disciplines and keep moving forward.</p><div class="actions"><a class="btn primary" href="#work">Explore selected work</a><a class="btn" href="#contact-form">Start a conversation</a></div></div><div class="visual"><canvas class="coastal-scene" aria-hidden="true"></canvas><span>Vision · Craft · Persistence</span></div></section>
+<main><section class="wrap hero"><canvas class="coastal-scene" aria-hidden="true"></canvas><div><div class="eyebrow">A personal portfolio · A continuing body of work</div><h1>Michael L.<br><em>DeMarco.</em></h1><p class="lead">Vision, practical skill and determination—expressed through design, construction documentation, project delivery and digital innovation. I build ideas into useful work, connect disciplines and keep moving forward.</p><div class="actions"><a class="btn primary" href="#work">Explore selected work</a><a class="btn" href="#contact-form">Start a conversation</a></div></div><div class="visual"><span>Vision · Craft · Persistence</span></div></section>
 <div class="wrap stats"><div><strong>20+</strong><small>Years of experience</small></div><div><strong>01</strong><small>Connected mindset</small></div><div><strong>CAD</strong><small>Documentation</small></div><div><strong>AI</strong><small>Digital innovation</small></div></div>
 <section id="work" class="wrap"><div class="head"><div><div class="eyebrow">Selected work</div><h2>Projects in motion.</h2></div><p>A selection of digital platforms, client-facing tools and project initiatives. Live links are provided where destinations are established.</p></div><div class="grid">
 <article class="card"><div class="num">01</div><div class="tag">Building design &amp; construction documents</div><h3>Simple Arch Studios</h3><p>Custom homes, residential rehabs and additions, and new residential and commercial construction. The studio prepares construction documents and blueprints for permitting and building, and coordinates nationwide with project-specific architects of record where required.</p><a href="https://simple-arch-studios.onrender.com/" target="_blank">Visit website ↗</a><a href="https://github.com/calibrationcorp/simple-arch" target="_blank">GitHub repository ↗</a></article>
@@ -168,122 +181,151 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
 })();
 </script><script id="theme-toggle-script">(function(){const buttons={nordic:document.getElementById('theme-nordic'),miami:document.getElementById('theme-miami')};function setTheme(t){document.body.dataset.theme=t;document.documentElement.style.colorScheme='dark';for(const [key,btn] of Object.entries(buttons))btn.setAttribute('aria-pressed',String(key===t));try{localStorage.setItem('portfolio-theme-swedish',t)}catch(e){}}for(const [key,btn] of Object.entries(buttons))btn.addEventListener('click',()=>setTheme(key));let saved='miami';try{saved=localStorage.getItem('portfolio-theme-swedish')||'miami'}catch(e){}setTheme(saved==='miami'?'miami':'nordic')})();</script><script>
 (() => {
- const canvas = document.querySelector('.coastal-scene');
+ const canvas = document.querySelector('.hero > .coastal-scene');
+ if (!canvas) return;
  const context = canvas.getContext('2d');
  if (!context) return;
  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
- const crown = [338, 120];
+ const crown = [338,120];
  const fronds = [
   [259,39,165,70,146,158], [248,87,155,128,170,216],
   [288,49,243,13,217,37], [326,58,296,21,267,24],
   [371,42,418,28,458,67], [419,58,491,79,506,169],
   [413,100,496,138,476,220], [378,127,443,170,428,239]
  ];
- const point = (start, a, b, end, t) =>
+ const point = (start,a,b,end,t) =>
   (1-t)**3*start + 3*(1-t)**2*t*a + 3*(1-t)*t*t*b + t**3*end;
- const curve = (x, y, segments) => {
+ const curve = (x,y,segments) => {
   context.beginPath();
-  context.moveTo(x, y);
+  context.moveTo(x,y);
   for (const segment of segments) context.bezierCurveTo(...segment);
   context.stroke();
  };
  function draw(time) {
   const {width,height} = canvas.getBoundingClientRect();
   if (!width || !height) return;
-  const ratio = Math.min(devicePixelRatio || 1, 2);
-  const pixelWidth = Math.round(width * ratio), pixelHeight = Math.round(height * ratio);
-  if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
-   canvas.width = pixelWidth;
-   canvas.height = pixelHeight;
+  const ratio = Math.min(window.devicePixelRatio || 1,2);
+  const pw = Math.round(width*ratio), ph = Math.round(height*ratio);
+  if(canvas.width!==pw || canvas.height!==ph){canvas.width=pw;canvas.height=ph;}
+  context.setTransform(pw/1200,0,0,ph/650,0,0);
+  context.clearRect(0,0,1200,650);
+  const colors=getComputedStyle(canvas);
+  const palm=colors.getPropertyValue('--palm-glow').trim() || '#ff6ac0';
+  const bird=colors.getPropertyValue('--bird-glow').trim() || '#65ffef';
+  const water=colors.getPropertyValue('--water-glow').trim() || '#38edff';
+  context.lineCap='round';
+  // Keep the fine waterfall behind the name rather than inside the orb card.
+  context.save();
+  context.translate(315,34);
+  context.scale(1,.99);
+  drawWaterfall(time,water);
+  context.restore();
+  // The second tree is smaller, mirrored, with a different number of fronds.
+  context.save();
+  context.translate(405,145);
+  context.scale(-.58,.94);
+  drawPalm(palm,Math.sin(time/2650+1.4)*7,6);
+  context.restore();
+  context.save();
+  context.translate(255,-18);
+  context.scale(1.16,1.31);
+  drawPalm(palm,Math.sin(time/2350)*6,8);
+  context.restore();
+  drawRoots(742,574,palm,1);
+  drawRoots(169,567,palm,.70);
+  drawCoconuts(time,palm);
+  drawSeagulls(time,bird);
+ }
+ function drawWaterfall(time,color) {
+  context.save();
+  context.strokeStyle=context.shadowColor=color;
+  context.shadowBlur=8;
+  context.lineWidth=1.5;
+  context.globalAlpha=.22;
+  // Sparse streaming strands retain the existing digital-waterfall style.
+  for(let stream=0;stream<7;stream++){
+   const x=251+stream*9.1;
+   const phase=stream*.8;
+   context.globalAlpha=.13+(stream%3)*.045;
+   context.setLineDash([4+stream%3*3,18+stream%4*5]);
+   context.lineDashOffset=-((time*(.012+stream%3*.004)+phase*13)%260);
+   curve(x,151,[[x+4,202,x-6,295,x+2,364],[x+1,403,x-3,451,x+2,518]]);
   }
-  context.setTransform(pixelWidth / 600, 0, 0, pixelHeight / 450, 0, 0);
-  context.clearRect(0, 0, 600, 450);
-  const colors = getComputedStyle(canvas);
-  const palm = colors.getPropertyValue('--palm-glow').trim();
-  const bird = colors.getPropertyValue('--bird-glow').trim();
-  context.lineCap = 'round';
-  drawWaterfall(time, colors.getPropertyValue('--water-glow').trim());
-  context.save();
-  context.translate(158, 67);
-  context.scale(.83, .79);
-  drawPalm(palm, Math.sin(time / 2350) * 6);
+  context.setLineDash([]);
+  context.lineDashOffset=0;
   context.restore();
+ }
+ function drawRoots(x,y,color,scale){
   context.save();
-  context.translate(283, 143);
-  context.scale(-.57, .62);
-  drawPalm(palm, Math.sin(time / 2350 + 1.2) * 7);
-  context.restore();
-  context.save();
-  context.strokeStyle = context.shadowColor = bird;
-  context.shadowBlur = 10;
-  context.lineWidth = 1.6;
-  context.globalAlpha = .86;
-  for (const [index,[x,y,size]] of [
-   [482,60,1], [530,106,.75], [449,142,.63],
-   [77,64,.75], [141,109,.61], [206,51,.57],
-   [262,99,.68], [320,55,.54], [383,115,.62]
-  ].entries()) {
-   const phase = time / 1200 + index * 1.2;
-   const wing = (7 + Math.sin(phase * 2.5) * 5) * size;
-   const px = x + Math.sin(phase * .45) * 14, py = y + Math.sin(phase) * 4;
-   curve(px-24*size,py-wing,[[px-13*size,py-wing*1.5,px-5*size,py-wing,px,py],[px+6*size,py-wing,px+14*size,py-wing*1.5,px+24*size,py-wing]]);
+  context.strokeStyle=context.shadowColor=color;
+  context.shadowBlur=7;
+  context.globalAlpha=.58;
+  context.lineWidth=1.5;
+  for(const side of [-1,1]){
+   for(let i=0;i<7;i++){
+    const spread=(58+i*21)*scale;
+    const down=(i%3)*6;
+    curve(x,y,[[x+side*22*scale,y-5,x+side*spread*.38,y+down+7,x+side*spread,y+4+down]]);
+   }
   }
   context.restore();
  }
- function drawWaterfall(time, color) {
+ function drawCoconuts(time,color){
+  const cycle=7600;
+  const coconuts=[
+   {start:500,delay:0,x:663,top:145,ground:571,size:7},
+   {start:1800,delay:2100,x:681,top:163,ground:571,size:6},
+   {start:3900,delay:4100,x:191,top:251,ground:570,size:5}
+  ];
   context.save();
-  context.strokeStyle = context.shadowColor = color;
-  context.globalAlpha = .84;
-  context.shadowBlur = 12;
-  context.lineWidth = 2.5;
-  curve(225,152,[[244,147,251,154,268,151],[282,148,308,142,333,145]]);
-  const water = context.createLinearGradient(0,145,0,406);
-  water.addColorStop(0,color);
-  water.addColorStop(1,'transparent');
-  context.shadowBlur = 0;
-  context.fillStyle = water;
-  context.globalAlpha = .34;
-  context.beginPath();
-  context.moveTo(247,152);
-  context.bezierCurveTo(249,211,248,322,221,403);
-  context.lineTo(347,403);
-  context.bezierCurveTo(320,322,316,213,315,146);
-  context.closePath();
-  context.fill();
-  for (let stream = 0; stream < 15; stream++) {
-   const x = 247 + stream * 4.8;
-   const y = 151 - stream * .35;
-   const drift = (stream - 7) * 1.5;
-   context.globalAlpha = .47 + (stream % 4) * .10;
-   context.lineWidth = 1 + (stream % 3) * .45;
-   context.setLineDash([8 + stream % 5 * 4, 7 + stream % 4 * 3]);
-   context.lineDashOffset = -((time * (.038 + stream % 3 * .013) + 7 * stream) % 300);
-   curve(x,y,[[x+3,y+23,x-4,236,x+drift*.35,295],[x+drift*.6,334,x+drift,383,x+drift*1.5,403]]);
-  }
-  context.setLineDash([]);
-  context.lineDashOffset = 0;
-  const mist = context.createRadialGradient(280,402,4,280,402,68);
-  mist.addColorStop(0,color);
-  mist.addColorStop(1,'transparent');
-  context.save();
-  context.translate(280,402);
-  context.scale(1,.25);
-  context.translate(-280,-402);
-  context.fillStyle = mist;
-  context.globalAlpha = .32;
-  context.fillRect(212,334,136,136);
-  context.restore();
-  for (let ring = 0; ring < 4; ring++) {
-   const spread = (time / 3200 + ring / 4) % 1;
-   context.globalAlpha = .75 * (1-spread);
-   context.lineWidth = 1.25;
+  for (const nut of coconuts){
+   const age=((time-nut.start+cycle*200)%cycle);
+   const fall=Math.max(0,age-nut.delay);
+   // A coconut releases, falls under gravity, bounces softly and rests near roots.
+   const duration=1150;
+   const t=Math.min(1,fall/duration);
+   let y=nut.top+(nut.ground-nut.top)*t*t;
+   if(fall>duration && fall<duration+650){
+    const bounce=(fall-duration)/650;
+    y=nut.ground-25*Math.sin(Math.PI*bounce)*(1-bounce);
+   }
+   const visible=age<nut.delay+duration+1800;
+   if(!visible)continue;
+   const x=nut.x+Math.sin(Math.min(fall,1300)/480)*12;
    context.beginPath();
-   context.ellipse(280,407,22+83*spread,3+13*spread,0,0,2*Math.PI);
+   context.arc(x,y,nut.size,0,Math.PI*2);
+   context.fillStyle='#9e6a43';
+   context.globalAlpha=.88;
+   context.shadowColor=color;
+   context.shadowBlur=9;
+   context.fill();
+   context.strokeStyle=color;
+   context.lineWidth=1.1;
    context.stroke();
   }
   context.restore();
  }
- function drawPalm(palm, sway) {
+ function drawSeagulls(time,color){
+  const birds=[
+   [85,95,.68,.042,0],[330,65,.75,.055,1.2],[580,127,.58,.064,2.1],
+   [840,72,.86,.047,3.5],[1040,186,.63,.072,5],
+   [175,325,.54,.062,4.4],[760,290,.70,.051,2.8]
+  ];
+  context.save();
+  context.strokeStyle=context.shadowColor=color;
+  context.shadowBlur=9;
+  context.lineWidth=1.8;
+  for(const [index,[baseX,baseY,size,speed,phase]] of birds.entries()){
+   const x=((baseX+time*speed+index*21)%1380)-90;
+   const y=baseY+Math.sin(time/950+phase)*22+Math.cos(time/1750+index)*11;
+   const wing=(7+Math.sin(time/240+phase)*5)*size;
+   context.globalAlpha=.37+(index%3)*.11;
+   curve(x-21*size,y-wing,[[x-11*size,y-wing*1.6,x-5*size,y-wing,x,y],
+     [x+5*size,y-wing,x+11*size,y-wing*1.6,x+21*size,y-wing]]);
+  }
+  context.restore();
+ }
+ function drawPalm(palm, sway, leafCount = 8) {
   context.strokeStyle = context.shadowColor = palm;
   const [cx, cy] = [crown[0] + sway, crown[1]];
   context.shadowBlur = 8;
@@ -300,7 +342,7 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
     [point(x,a,c,e,t),point(y,b,d,f,t)]);
    curve(lx,ly,[[lx+5,ly+4,rx-4,ry+4,rx,ry]]);
   }
-  for (const [a,ay,b,by,e,ey] of fronds) {
+  for (const [a,ay,b,by,e,ey] of fronds.slice(0,leafCount)) {
    const ax = a+sway, bx = b+sway*1.25, ex = e+sway*1.5;
    context.shadowBlur = 5;
    context.globalAlpha = .82;
@@ -334,19 +376,13 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
   curve(cx,cy-60,[[cx,cy-15,cx,cy+15,cx,cy+60]]);
   context.setLineDash([]);
  }
- let frame;
- function animate(time) {
-  draw(time);
-  frame = requestAnimationFrame(animate);
- }
- function update() {
-  cancelAnimationFrame(frame);
-  if (reduced.matches) draw(0);
-  else frame = requestAnimationFrame(animate);
- }
- reduced.addEventListener('change', update);
- new ResizeObserver(() => { if (reduced.matches) draw(0); }).observe(canvas);
- new MutationObserver(() => { if (reduced.matches) draw(0); }).observe(document.body, {attributes:true,attributeFilter:['data-theme']});
+ let frame=0;
+ function animate(time){draw(time);frame=requestAnimationFrame(animate);}
+ function update(){cancelAnimationFrame(frame);if(reduced.matches)draw(0);else frame=requestAnimationFrame(animate);}
+ reduced.addEventListener('change',update);
+ new ResizeObserver(()=>{if(reduced.matches)draw(0);}).observe(canvas);
+ new MutationObserver(()=>{if(reduced.matches)draw(0);}).observe(document.body,{attributes:true,attributeFilter:['data-theme']});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(frame);else update();});
  update();
 })();
 </script><script>
