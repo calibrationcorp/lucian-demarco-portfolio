@@ -88,7 +88,7 @@ body[data-theme="nordic"] .coastal-scene{--palm-glow:#88d3ff;--bird-glow:#fecc02
 .atlas-preview small{color:#d7e4a8}
 </style><style id="hero-expanded-coastal-art">
 .hero{isolation:isolate;overflow:visible}
-.hero>.coastal-scene{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.82}
+.hero>.coastal-scene{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.76;display:block}.hero>div:first-of-type{position:relative;z-index:2}.hero>div.visual{position:relative;z-index:1}
 .hero>div{position:relative;z-index:1}
 .hero h1,.hero .lead,.hero .eyebrow,.hero .actions{position:relative;z-index:2}
 .hero .visual{isolation:isolate}
@@ -224,15 +224,15 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
   context.save();
   context.translate(405,145);
   context.scale(-.58,.94);
-  drawPalm(palm,Math.sin(time/2650+1.4)*7,6);
+  drawPalm(palm,Math.sin(time/2650+1.4)*6,6,535);
   context.restore();
   context.save();
   context.translate(255,-18);
   context.scale(1.16,1.31);
-  drawPalm(palm,Math.sin(time/2350)*6,8);
+  drawPalm(palm,Math.sin(time/2350)*5,8,510);
   context.restore();
-  drawRoots(742,574,palm,1);
-  drawRoots(169,567,palm,.70);
+  drawRoots(738,648,palm,1);
+  drawRoots(169,648,palm,.70);
   drawCoconuts(time,palm);
   drawSeagulls(time,bird);
  }
@@ -264,8 +264,8 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
   for(const side of [-1,1]){
    for(let i=0;i<7;i++){
     const spread=(58+i*21)*scale;
-    const down=(i%3)*6;
-    curve(x,y,[[x+side*22*scale,y-5,x+side*spread*.38,y+down+7,x+side*spread,y+4+down]]);
+    const down=-2-(i%3)*3;
+    curve(x,y,[[x+side*22*scale,y-5,x+side*spread*.38,y+down+1,x+side*spread,y+down]]);
    }
   }
   context.restore();
@@ -273,9 +273,9 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
  function drawCoconuts(time,color){
   const cycle=7600;
   const coconuts=[
-   {start:500,delay:0,x:663,top:145,ground:571,size:7},
+   {start:500,delay:0,x:663,top:145,ground:646,size:7},
    {start:1800,delay:2100,x:681,top:163,ground:571,size:6},
-   {start:3900,delay:4100,x:191,top:251,ground:570,size:5}
+   {start:3900,delay:4100,x:191,top:251,ground:646,size:5}
   ];
   context.save();
   for (const nut of coconuts){
@@ -325,14 +325,14 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
   }
   context.restore();
  }
- function drawPalm(palm, sway, leafCount = 8) {
+ function drawPalm(palm, sway, leafCount = 8, groundY = 510) {
   context.strokeStyle = context.shadowColor = palm;
   const [cx, cy] = [crown[0] + sway, crown[1]];
   context.shadowBlur = 8;
   context.globalAlpha = .78;
   context.lineWidth = 2;
-  const leftTrunk = [406,450,357,351,316+sway*.45,237,330+sway,120];
-  const rightTrunk = [431,450,370,350,332+sway*.45,237,346+sway,120];
+  const leftTrunk = [406,groundY,357,351,316+sway*.45,237,330+sway,120];
+  const rightTrunk = [431,groundY,370,350,332+sway*.45,237,346+sway,120];
   for (const [x,y,...controls] of [leftTrunk,rightTrunk]) curve(x,y,[controls]);
   context.globalAlpha = .44;
   context.lineWidth = .9;
