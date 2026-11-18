@@ -263,7 +263,14 @@ async function deliver(form, result, type) {
   result.textContent = newsletter ? 'Your subscription request was sent.' : 'Your message was sent. Thank you.';
   form.reset();
  } catch {
-  result.textContent = 'Your submission could not be sent. Please try again shortly.';
+  const recipient = 'calibrationcorp.network@gmail.com';
+  const subject = encodeURIComponent('Website ' + type + ': ' + (payload.topic || 'General inquiry'));
+  const body = encodeURIComponent(['Name: ' + (payload.name || ''),'Email: ' + (payload.email || ''),'Phone: ' + (payload.phone || ''),'Topic: ' + (payload.topic || ''),'',payload.message || 'Newsletter subscription request'].join('\\n'));
+  const alternative = document.createElement('a');
+  alternative.href = 'mailto:' + recipient + '?subject=' + subject + '&body=' + body;
+  alternative.textContent = 'Open your email application to send this inquiry instead ↗';
+  alternative.style.textDecoration = 'underline';
+  result.replaceChildren(document.createTextNode('The website email service is temporarily unavailable. Your message was not sent. '), alternative);
  } finally {
   button.disabled = false;
  }
