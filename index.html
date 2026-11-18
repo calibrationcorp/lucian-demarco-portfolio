@@ -73,8 +73,14 @@ body[data-theme="nordic"] .gridmint-bars i{background:#69c6ff}</style><style id=
 .service-line h4{font-size:14px;line-height:1.35;margin:0 0 4px;color:var(--text,#fff)}
 .gallery-copy .service-line p{font-size:12px;line-height:1.65;margin:0;color:var(--muted,#b6c0c9)}
 .service-details>summary:focus-visible{outline:2px solid var(--gold,#ffcc00);outline-offset:4px}
-</style><style>.computing-preview{height:100%;min-height:260px;padding:30px;background:radial-gradient(circle at 85% 25%,#204b70,transparent 48%),linear-gradient(140deg,#07101b,#12233b);display:flex;flex-direction:column;justify-content:space-between;color:#e9f5ff}.computing-preview small{letter-spacing:.22em;color:#84c8ef;font-weight:700}.computing-preview strong{font:clamp(23px,3vw,39px)/1.1 Georgia,serif}.computing-preview>span{font-size:10px;letter-spacing:.13em;color:#b2c8dc}.computing-nodes{display:flex;gap:9px;flex-wrap:wrap}.computing-nodes i{font-style:normal;font-size:10px;letter-spacing:.1em;border:1px solid #4386a6;padding:6px 10px;border-radius:6px;color:#a7e4ff}</style></head><body data-theme="miami"><header class="wrap top"><a class="brand" href="#"><b>LD</b> Michael L. DeMarco</a><div class="theme-switcher" role="group" aria-label="Website appearance"><button type="button" id="theme-nordic" aria-pressed="false">☀ Nordic Calm</button><button type="button" id="theme-miami" aria-pressed="true">✦ Miami Neon</button></div><nav><a href="#work">Selected work</a><a href="#ventures">Ventures</a><a href="#profile">My story</a><a href="#contact">Contact</a></nav></header>
-<main><section class="wrap hero"><div><div class="eyebrow">A personal portfolio · A continuing body of work</div><h1>Michael, L.<br><em>DeMarco.</em></h1><p class="lead">Vision, practical skill and determination—expressed through design, construction documentation, project delivery and digital innovation. I build ideas into useful work, connect disciplines and keep moving forward.</p><div class="actions"><a class="btn primary" href="#work">Explore selected work</a><a class="btn" href="#contact-form">Start a conversation</a></div></div><div class="visual"><span>Vision · Craft · Persistence</span></div></section>
+</style><style>.computing-preview{height:100%;min-height:260px;padding:30px;background:radial-gradient(circle at 85% 25%,#204b70,transparent 48%),linear-gradient(140deg,#07101b,#12233b);display:flex;flex-direction:column;justify-content:space-between;color:#e9f5ff}.computing-preview small{letter-spacing:.22em;color:#84c8ef;font-weight:700}.computing-preview strong{font:clamp(23px,3vw,39px)/1.1 Georgia,serif}.computing-preview>span{font-size:10px;letter-spacing:.13em;color:#b2c8dc}.computing-nodes{display:flex;gap:9px;flex-wrap:wrap}.computing-nodes i{font-style:normal;font-size:10px;letter-spacing:.1em;border:1px solid #4386a6;padding:6px 10px;border-radius:6px;color:#a7e4ff}</style><style>
+.hero{position:relative;isolation:isolate}
+.coastal-scene{position:absolute;inset:0 0 0 auto;width:min(65%,850px);height:100%;z-index:-1;pointer-events:none;opacity:.52;--palm-glow:#a9ccff;--bird-glow:#efffbd}
+body[data-theme="miami"] .coastal-scene{--palm-glow:#ff6ac0;--bird-glow:#65ffef}
+body[data-theme="nordic"] .coastal-scene{--palm-glow:#88d3ff;--bird-glow:#fecc02}
+@media(max-width:760px){.coastal-scene{width:100%;opacity:.32}}
+</style></head><body data-theme="miami"><header class="wrap top"><a class="brand" href="#"><b>LD</b> Michael L. DeMarco</a><div class="theme-switcher" role="group" aria-label="Website appearance"><button type="button" id="theme-nordic" aria-pressed="false">☀ Nordic Calm</button><button type="button" id="theme-miami" aria-pressed="true">✦ Miami Neon</button></div><nav><a href="#work">Selected work</a><a href="#ventures">Ventures</a><a href="#profile">My story</a><a href="#contact">Contact</a></nav></header>
+<main><section class="wrap hero"><canvas class="coastal-scene" aria-hidden="true"></canvas><div><div class="eyebrow">A personal portfolio · A continuing body of work</div><h1>Michael, L.<br><em>DeMarco.</em></h1><p class="lead">Vision, practical skill and determination—expressed through design, construction documentation, project delivery and digital innovation. I build ideas into useful work, connect disciplines and keep moving forward.</p><div class="actions"><a class="btn primary" href="#work">Explore selected work</a><a class="btn" href="#contact-form">Start a conversation</a></div></div><div class="visual"><span>Vision · Craft · Persistence</span></div></section>
 <div class="wrap stats"><div><strong>20+</strong><small>Years of experience</small></div><div><strong>01</strong><small>Connected mindset</small></div><div><strong>CAD</strong><small>Documentation</small></div><div><strong>AI</strong><small>Digital innovation</small></div></div>
 <section id="work" class="wrap"><div class="head"><div><div class="eyebrow">Selected work</div><h2>Projects in motion.</h2></div><p>A selection of digital platforms, client-facing tools and project initiatives. Live links are provided where destinations are established.</p></div><div class="grid">
 <article class="card"><div class="num">01</div><div class="tag">Digital platform</div><h3>Simple Arch Studios</h3><p>Technical design, CAD drafting, project documentation and presentation.</p><a href="https://simple-arch-studios.onrender.com/" target="_blank">Visit website ↗</a><a href="https://github.com/calibrationcorp/simple-arch" target="_blank">GitHub repository ↗</a></article>
@@ -142,4 +148,83 @@ const modal=document.getElementById('subscribe-modal');
 document.getElementById('subscribe-close').onclick=()=>{modal.hidden=true;sessionStorage.setItem('promo-dismissed','1')};
 if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false},12000)
 })();
-</script><script id="theme-toggle-script">(function(){const buttons={nordic:document.getElementById('theme-nordic'),miami:document.getElementById('theme-miami')};function setTheme(t){document.body.dataset.theme=t;document.documentElement.style.colorScheme='dark';for(const [key,btn] of Object.entries(buttons))btn.setAttribute('aria-pressed',String(key===t));try{localStorage.setItem('portfolio-theme-swedish',t)}catch(e){}}for(const [key,btn] of Object.entries(buttons))btn.addEventListener('click',()=>setTheme(key));let saved='miami';try{saved=localStorage.getItem('portfolio-theme-swedish')||'miami'}catch(e){}setTheme(saved==='miami'?'miami':'nordic')})();</script></body></html>
+</script><script id="theme-toggle-script">(function(){const buttons={nordic:document.getElementById('theme-nordic'),miami:document.getElementById('theme-miami')};function setTheme(t){document.body.dataset.theme=t;document.documentElement.style.colorScheme='dark';for(const [key,btn] of Object.entries(buttons))btn.setAttribute('aria-pressed',String(key===t));try{localStorage.setItem('portfolio-theme-swedish',t)}catch(e){}}for(const [key,btn] of Object.entries(buttons))btn.addEventListener('click',()=>setTheme(key));let saved='miami';try{saved=localStorage.getItem('portfolio-theme-swedish')||'miami'}catch(e){}setTheme(saved==='miami'?'miami':'nordic')})();</script><script>
+(() => {
+ const canvas = document.querySelector('.coastal-scene');
+ const context = canvas.getContext('2d');
+ if (!context) return;
+ const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+ const fronds = [
+  [85,126,175,100,245,180], [112,126,205,153,230,235],
+  [174,65,241,55,298,84], [218,38,278,23,326,52],
+  [296,28,334,22,371,55], [362,32,409,76,425,131],
+  [425,61,476,104,498,177], [395,128,424,175,420,245]
+ ];
+ const curve = (x, y, segments) => {
+  context.beginPath();
+  context.moveTo(x, y);
+  for (const segment of segments) context.bezierCurveTo(...segment);
+  context.stroke();
+ };
+ function draw(time) {
+  const {width,height} = canvas.getBoundingClientRect();
+  if (!width || !height) return;
+  const ratio = Math.min(devicePixelRatio || 1, 2);
+  const pixelWidth = Math.round(width * ratio), pixelHeight = Math.round(height * ratio);
+  if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+   canvas.width = pixelWidth;
+   canvas.height = pixelHeight;
+  }
+  context.setTransform(pixelWidth / 600, 0, 0, pixelHeight / 450, 0, 0);
+  context.clearRect(0, 0, 600, 450);
+  const colors = getComputedStyle(canvas);
+  const palm = colors.getPropertyValue('--palm-glow').trim();
+  const bird = colors.getPropertyValue('--bird-glow').trim();
+  context.lineCap = 'round';
+  context.strokeStyle = context.shadowColor = palm;
+  context.shadowBlur = 11;
+  context.globalAlpha = .64;
+  context.lineWidth = 2;
+  curve(373, 460, [[335,319,306,216,302,106]]);
+  curve(389, 460, [[347,319,312,213,302,106]]);
+  const point = (start, a, b, end, t) => (1-t)**3*start+3*(1-t)**2*t*a+3*(1-t)*t*t*b+t**3*end;
+  for (const [ax,ay,bx,by,ex,ey] of fronds) {
+   context.globalAlpha = .73;
+   context.lineWidth = 1.7;
+   curve(302, 106, [[ax,ay,bx,by,ex,ey]]);
+   context.globalAlpha = .44;
+   context.lineWidth = .9;
+   for (let i = 1; i <= 8; i++) {
+    const t = i / 10;
+    const x = point(302,ax,bx,ex,t), y = point(106,ay,by,ey,t);
+    const spread = (ex < 302 ? -1 : 1) * (10 + 16 * Math.sin(Math.PI * t));
+    curve(x,y,[[x+spread*.5,y+9,x+spread,y+22,x+spread*1.4,y+29]]);
+   }
+  }
+  context.strokeStyle = context.shadowColor = bird;
+  context.shadowBlur = 10;
+  context.lineWidth = 1.6;
+  context.globalAlpha = .86;
+  for (const [index,[x,y,size]] of [[482,60,1],[530,106,.75],[449,142,.63]].entries()) {
+   const phase = time / 1200 + index * 1.2;
+   const wing = (7 + Math.sin(phase * 2.5) * 5) * size;
+   const px = x + Math.sin(phase * .45) * 14, py = y + Math.sin(phase) * 4;
+   curve(px-24*size,py-wing,[[px-13*size,py-wing*1.5,px-5*size,py-wing,px,py],[px+6*size,py-wing,px+14*size,py-wing*1.5,px+24*size,py-wing]]);
+  }
+ }
+ let frame;
+ function animate(time) {
+  draw(time);
+  frame = requestAnimationFrame(animate);
+ }
+ function update() {
+  cancelAnimationFrame(frame);
+  if (reduced.matches) draw(0);
+  else frame = requestAnimationFrame(animate);
+ }
+ reduced.addEventListener('change', update);
+ new ResizeObserver(() => { if (reduced.matches) draw(0); }).observe(canvas);
+ new MutationObserver(() => { if (reduced.matches) draw(0); }).observe(document.body, {attributes:true,attributeFilter:['data-theme']});
+ update();
+})();
+</script></body></html>
