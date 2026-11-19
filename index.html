@@ -249,8 +249,20 @@ body[data-theme="miami"]:before,body[data-theme="nordic"]:before{background-size
 .featured-image .brand-preview{width:100%;height:100%;display:block;position:relative;overflow:hidden}
 .brand-preview svg{height:100%;width:100%;display:block}
 @media(max-width:580px){.hero-social-links{width:100%;gap:5px}.hero-social-links img{width:34px;height:34px}.hero-social-links a{font-size:10px;padding:8px!important}}
+</style>
+<style id="tiki-and-quote-2026">
+/* Foreground characters stay in view, above the hero's background art. */
+.hero{position:relative}
+.hero .tiki-collectors-scene{position:absolute;left:0;bottom:0;width:100%;height:clamp(95px,13vw,145px);z-index:4;pointer-events:none;display:block;overflow:visible;filter:drop-shadow(0 3px 4px #071020aa)}
+.hero .tiki-collectors-scene:focus{outline:none}
+.orbit-visual{overflow:visible!important}
+.orbit-caption{bottom:8px!important;z-index:5;line-height:1.3}
+.space-invaders-quote{display:block;color:#fff27d;font:900 clamp(12px,1.6vw,17px)/1.15 'Courier New',monospace;letter-spacing:.045em;text-transform:uppercase;text-shadow:0 0 8px #ff42ad,0 0 16px #f139ac,1px 2px 0 #171131;margin-bottom:5px}
+.orbit-subtitle{display:block;font-size:10px;color:#f0f5ff;letter-spacing:.1em}
+@media(max-width:800px){.hero .tiki-collectors-scene{height:110px}.hero{padding-bottom:102px!important}.orbit-caption{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.hero .tiki-collectors-scene{filter:none}}
 </style></head><body data-theme="miami"><header id="home" class="wrap top"><a class="brand" href="#home"><b>MD</b> Michael L. DeMarco</a><div class="theme-switcher" role="group" aria-label="Website appearance"><button type="button" id="theme-nordic" aria-pressed="false">☀ Nordic Calm</button><button type="button" id="theme-miami" aria-pressed="true">✦ Miami Neon</button></div><nav><a href="#work">Selected work</a><a href="#ventures">Ventures</a><a href="#profile">My story</a><a href="#contact">Contact</a></nav></header>
-<main><section class="wrap hero"><canvas class="coastal-scene" aria-hidden="true"></canvas><div><div class="eyebrow">A personal portfolio · A continuing body of work</div><h1>Michael L.<br><em>DeMarco.</em></h1><p class="lead">Vision, practical skill and determination—expressed through design, construction documentation, project delivery and digital innovation. I build ideas into useful work, connect disciplines and keep moving forward.</p><div class="actions"><a class="btn primary" href="#work">Explore selected work</a><a class="btn" href="#contact-form">Start a conversation</a></div><div class="chat-social-bar hero-social-links" aria-label="Connect with Michael L. DeMarco"><img src="assets/michael-chat-profile.svg" alt="Michael L. DeMarco profile portrait" width="44" height="44"><a href="https://www.facebook.com/LUCIANMDEMARCO" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">Facebook</a><a href="https://www.instagram.com/calibrationcorp/" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">Instagram</a><a class="social-whatsapp" href="https://wa.me/17325567388" target="_blank" rel="noopener noreferrer" aria-label="Chat with Michael on WhatsApp">WhatsApp</a></div></div><div class="visual orbit-visual">
+<main><section class="wrap hero"><canvas class="coastal-scene" aria-hidden="true"></canvas><canvas class="tiki-collectors-scene" aria-label="Two playful tiki collectors run out and stack seven coconuts before the pile topples and the coconuts roll left and right." role="img"></canvas><div><div class="eyebrow">A personal portfolio · A continuing body of work</div><h1>Michael L.<br><em>DeMarco.</em></h1><p class="lead">Vision, practical skill and determination—expressed through design, construction documentation, project delivery and digital innovation. I build ideas into useful work, connect disciplines and keep moving forward.</p><div class="actions"><a class="btn primary" href="#work">Explore selected work</a><a class="btn" href="#contact-form">Start a conversation</a></div><div class="chat-social-bar hero-social-links" aria-label="Connect with Michael L. DeMarco"><img src="assets/michael-chat-profile.svg" alt="Michael L. DeMarco profile portrait" width="44" height="44"><a href="https://www.facebook.com/LUCIANMDEMARCO" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">Facebook</a><a href="https://www.instagram.com/calibrationcorp/" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">Instagram</a><a class="social-whatsapp" href="https://wa.me/17325567388" target="_blank" rel="noopener noreferrer" aria-label="Chat with Michael on WhatsApp">WhatsApp</a></div></div><div class="visual orbit-visual">
   <svg class="orbit-scene" viewBox="0 0 440 250" role="img" aria-labelledby="hero-orbit-title">
     <title id="hero-orbit-title">The Sun and Moon orbit Earth as a laser from the Norwegian flag picks off two shuttles, three escorts, and their mothership.</title>
     <defs>
@@ -345,7 +357,7 @@ body[data-theme="miami"]:before,body[data-theme="nordic"]:before{background-size
     <g class="orbit-fleet-still" transform="translate(103 54) rotate(-31)" aria-hidden="true"><use href="#orbit-fleet"/>        <use href="#orbit-escort" x="34" y="-14"/>        <use href="#orbit-escort" x="29" y="15"/>        <use href="#orbit-escort" x="-39" y="14"/></g>
     <g class="orbit-hit" aria-hidden="true" pointer-events="none" visibility="hidden"><line x1="236" y1="105" stroke="#ff718b" stroke-width="3" stroke-linecap="round"/><line x1="236" y1="105" stroke="#fff4c6" stroke-width="1"/><circle fill="none" stroke="#ffd787" stroke-width="1.6"/></g>
   </svg>
-  <small class="orbit-caption"><strong style="display:block;color:#ffd787">All your base are belong to us !</strong>Earth Centric - Prove Me Wrong</small>
+  <small class="orbit-caption"><strong class="space-invaders-quote">All your base are belong to us</strong><span class="orbit-subtitle">Earth Centric — Prove Me Wrong</span></small>
 </div></section><div class="wrap stats"><div><strong>20+</strong><small>Years of experience</small></div><div><strong>01</strong><small>Connected mindset</small></div><div><strong>CAD</strong><small>Documentation</small></div><div><strong>AI</strong><small>Digital innovation</small></div></div><section class="wrap showcase-cta" aria-labelledby="showcase-cta-title"><div class="showcase-icon" aria-hidden="true">✉</div><div><div class="eyebrow">Have a project in mind?</div><h2 id="showcase-cta-title">Residential, commercial or digital innovation.</h2><p>Let's talk about your design, documentation, project delivery or next idea.</p></div><a class="btn primary" href="#contact-form">Send a project inquiry →</a></section><section class="wrap studio-strip" aria-label="Simple Arch Studios principal business"><a class="studio-strip-logo" href="https://simplearchstudios.com/" target="_blank" rel="noopener noreferrer"><img src="assets/simplearch-logo.svg" width="440" height="132" alt="Simple Arch Studios LLC, design and as-built documentation" loading="eager"></a><div class="studio-strip-copy"><p><strong>Simple Arch Studios</strong> — building design, documentation, permit coordination and project planning, with licensed design professionals engaged wherever required for signed and sealed documents.</p></div><a class="btn" href="https://simplearchstudios.com/" target="_blank" rel="noopener noreferrer">Visit Simple Arch Studios ↗</a></section><section id="featured-work" class="wrap featured-work" aria-labelledby="featured-title"><div class="featured-heading"><div><div class="eyebrow">Selected work</div><h2 id="featured-title">Built around ideas that work.</h2></div><a href="#visual-portfolio">View all portfolio previews →</a></div><div class="featured-grid"><a class="featured-tile" href="https://simplearchstudios.com/" target="_blank" rel="noopener noreferrer"><div class="featured-image"><img src="assets/homepage-simplearch.webp" width="720" height="372" alt="SimpleArch Studios homepage screenshot" loading="lazy" decoding="async"></div><div class="featured-meta"><strong>Custom residences</strong><small>Design concepts · CAD · documentation</small><span aria-hidden="true">↗</span></div></a><a class="featured-tile" href="https://calibration-architecture.onrender.com/" target="_blank" rel="noopener noreferrer"><div class="featured-image"><img src="assets/homepage-calibration.webp" width="720" height="372" alt="Calibration Architecture homepage screenshot" loading="lazy" decoding="async"></div><div class="featured-meta"><strong>Enterprise digital systems</strong><small>Applications · databases · secure workflows</small><span aria-hidden="true">↗</span></div></a><a class="featured-tile" href="https://sacred-atlas.onrender.com/" target="_blank" rel="noopener noreferrer"><div class="featured-image"><img src="assets/homepage-sacred-atlas.webp" width="720" height="372" alt="Sacred Atlas homepage screenshot" loading="lazy" decoding="async"></div><div class="featured-meta"><strong>Sacred Atlas</strong><small>Global discovery · mapping · research</small><span aria-hidden="true">↗</span></div></a><a class="featured-tile" href="https://onlydecks.store/" target="_blank" rel="noopener noreferrer"><div class="featured-image"><img src="assets/homepage-onlydecks.webp" width="720" height="372" alt="OnlyDecks homepage screenshot" loading="lazy" decoding="async"></div><div class="featured-meta"><strong>OnlyDecks</strong><small>Deck planning · project tools · customer journeys</small><span aria-hidden="true">↗</span></div></a></div></section><section class="wrap neon-quick-connect" aria-labelledby="neon-book-title"><div class="neon-quick-scene" aria-hidden="true"><span></span></div><div class="neon-quick-heading"><p class="eyebrow">Let's connect</p><h2 id="neon-book-title">Schedule a conversation.</h2><p>A focused 30-minute consultation about your project, goals or collaboration idea.</p></div><div class="neon-quick-times"><span class="neon-quick-label">Pick a time</span><p>View real-time availability through Calendly</p><a href="https://calendly.com/simplearchstudios/30min" target="_blank" rel="noopener noreferrer" class="btn neon-book-btn">View available times ↗</a></div><div class="neon-quick-contact"><span class="neon-quick-label">Other ways to reach me</span><a href="#contact-form" class="btn">Send a message ↗</a><a href="#contact" class="neon-quick-personal">Contact details</a></div></section><section id="connect" class="wrap showcase-connect"><div class="showcase-connect-intro"><p class="eyebrow">Let's connect</p><h2>Schedule a conversation.</h2><p>Choose a consultation time or send a detailed inquiry below. Select a time on the embedded Calendly scheduler or send your project inquiry through the form.</p></div><div class="engage-grid"><div class="engage-panel"><h3>Residential or commercial project inquiry</h3><form id="contact-form" tabindex="-1"><label>Your name<input name="name" required autocomplete="name"></label><label>Your email<input type="email" name="email" required autocomplete="email"></label><label>Your phone (optional)<input type="tel" name="phone" autocomplete="tel"></label><label>Project or inquiry<select name="topic"><option>General inquiry</option><option>Residential design &amp; construction documents</option><option>Commercial design &amp; construction documents</option><option>Site plans &amp; permit coordination</option><option>Structural / MEP consultant coordination</option><option>Design and project documents</option><option>Website or software project</option><option>Partnership</option></select></label><label>Message<textarea name="message" rows="5" placeholder="Tell me the project location, property type, goals, scope, schedule, and permit needs." required></textarea></label><label class="consent-line"><input type="checkbox" name="contact_consent" required> I agree to be contacted about my inquiry.</label><button type="submit" id="contact-submit">Send message</button><p class="fineprint">Please do not include sensitive personal information.</p><p id="contact-result" role="status" aria-live="polite"></p></form></div><div class="engage-panel"><h3>Schedule a 30-minute consultation</h3><p>Select a consultation time in the Simple Arch Studios calendar. Availability and video meeting options are managed through Calendly.</p><iframe title="Calendly scheduling calendar" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://calendly.com/simplearchstudios/30min?embed_domain=luciandemar.co&amp;embed_type=Inline"></iframe><p><a href="https://calendly.com/simplearchstudios/30min" target="_blank" rel="noopener noreferrer">Open full scheduling calendar ↗</a></p></div></div></section>
 <section id="work" class="wrap"><div class="head"><div><div class="eyebrow">Selected work</div><h2>Projects in motion.</h2></div><p>A selection of digital platforms, client-facing tools and project initiatives. Live links are provided where destinations are established.</p></div><div class="grid">
 <article class="card"><div class="num">01</div><div class="tag">Building design &amp; construction documents</div><h3>Simple Arch Studios</h3><p>Custom homes, residential rehabs and additions, and new residential and commercial construction. The studio prepares construction documents and blueprints for permitting and building, and coordinates nationwide with project-specific architects of record where required.</p><a href="https://simple-arch-studios.onrender.com/" target="_blank">Visit website ↗</a><a href="https://github.com/calibrationcorp/simple-arch" target="_blank">GitHub repository ↗</a></article>
@@ -503,7 +515,7 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
   context.restore();
   drawRoots(738,648,palm,1);
   drawRoots(169,648,palm,.70);
-  drawCoconuts(time,palm);
+  // The tiki collection sequence now has its own foreground canvas.
   drawSeagulls(time,bird);
  }
  function drawWaterfall(time,color) {
@@ -852,4 +864,102 @@ document.querySelectorAll('#visual-portfolio .project-homepage').forEach(link=>{
  reduce.addEventListener('change',update);
  document.addEventListener('visibilitychange',update);
  update();
-})();</script></body></html>
+})();</script>
+<script id="tiki-collectors-visible">
+/* Dedicated hero foreground animation; no images or remote dependencies. */
+(() => {
+ const canvas=document.querySelector('.tiki-collectors-scene');
+ if(!canvas)return;
+ const ctx=canvas.getContext('2d');
+ if(!ctx)return;
+ const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+ const duration=7*2600+2800;
+ let raf=0,start=0;
+ const clamp=n=>Math.max(0,Math.min(1,n));
+ const smooth=n=>{n=clamp(n);return n*n*(3-2*n)};
+ function ellipse(x,y,rx,ry,fill){
+  ctx.fillStyle=fill;ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fill();
+ }
+ function coconut(x,y,angle=0){
+  ctx.save();ctx.translate(x,y);ctx.rotate(angle);
+  ellipse(0,0,11,10,'#643c22');ellipse(-3,-3,6,4,'#b7844f');
+  ctx.strokeStyle='#e8b982';ctx.lineWidth=1.8;ctx.beginPath();ctx.ellipse(0,0,10,9,0,0,Math.PI*2);ctx.stroke();
+  for(const p of [[1,-2],[5,0],[2,3]])ellipse(p[0],p[1],1.3,1.5,'#302016');
+  ctx.restore();
+ }
+ function tiki(x,ground,phase,accent,flip,carrying){
+  ctx.save();ctx.translate(x,ground);ctx.scale(flip,1);
+  const bob=Math.abs(Math.sin(phase))*3, step=Math.sin(phase)*8;
+  ellipse(-8-step,-3,7,4,'#36221f');ellipse(8+step,-3,7,4,'#36221f');
+  ctx.translate(0,-bob);
+  ellipse(0,-19,16,17,'#755039');
+  ellipse(0,-34,18,19,'#a76b42');
+  ctx.fillStyle='#654026';ctx.fillRect(-13,-46,26,6);
+  for(let i=-2;i<=2;i++){ellipse(i*5,-52-Math.abs(i%2)*3,3.8,10,i%2?'#32bba1':accent);}
+  for(const eye of [-7,7]){
+   ellipse(eye,-37,5.2,6.1,'#fff3db');ellipse(eye+1,-36,2.8,3.8,'#20282a');ellipse(eye+1.5,-38,1,1.2,'#fff');
+  }
+  ellipse(0,-27,6,4,'#4c281f');ellipse(0,-26,3,1.8,'#efb796');
+  ellipse(-17,-20+step*.3,4.5,6,'#c98b5c');
+  ellipse(17,-20-step*.3,4.5,6,'#c98b5c');
+  if(carrying){ellipse(16,-28,6,5,'#e8b078');coconut(24,-41,Math.sin(phase)*.15);}
+  ctx.restore();
+ }
+ const spots=[[0,0],[-24,0],[24,0],[-12,-19],[12,-19],[0,-38],[0,-57]];
+ function render(ms){
+  const rect=canvas.getBoundingClientRect();
+  if(rect.width<1||rect.height<1)return;
+  const dpr=Math.min(devicePixelRatio||1,2),w=Math.round(rect.width*dpr),h=Math.round(rect.height*dpr);
+  if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
+  ctx.setTransform(w/1000,0,0,h/160,0,0);ctx.clearRect(0,0,1000,160);
+  const t=reduce.matches?7*2600-200:ms%duration, floor=147, pileX=510;
+  // A slim, readable staging strip anchors the figures without covering the hero.
+  ctx.fillStyle='rgba(19,12,38,.28)';ctx.fillRect(0,150,1000,10);
+  const tumble=clamp((t-7*2600)/2300);
+  spots.forEach(([dx,dy],i)=>{
+   const age=t-i*2600;
+   if(age<0)return;
+   if(tumble>0){
+    const side=i%2===0?-1:1,roll=tumble*tumble*(490+(i%3)*75);
+    const bounce=Math.abs(Math.sin(tumble*14+i))*8*(1-tumble);
+    const x=pileX+dx+side*roll,y=floor-11+dy*(1-clamp(tumble*3))-bounce;
+    if(x>-25&&x<1025)coconut(x,y,side*tumble*15);
+   }else if(age>=2100){coconut(pileX+dx,floor-11+dy);}
+   else if(age<650){
+    const f=smooth(age/650),x=(i%2?860:140),y=15+(floor-26)*f;
+    coconut(x,y,f*3);
+   }
+  });
+  const walking=t<7*2600;
+  for(let who=0;who<2;who++){
+   const beginning=who===0?90:910,edge=who===0?140:860;
+   const i=walking?Math.min(6,Math.floor(t/2600)):6;
+   const assigned=i%2===who;
+   const age=t-i*2600;
+   const home=who===0?355:665;
+   const x=assigned&&walking
+      ?age<650?beginning+(edge-beginning)*smooth(age/650)
+      :age<1800?edge+(pileX+(who?37:-37)-edge)*smooth((age-650)/1150)
+      :pileX+(who?37:-37)+(home-(pileX+(who?37:-37)))*smooth((age-1800)/800)
+      :home+Math.sin(t/1400+who)*10;
+   const carry=assigned&&walking&&age>=650&&age<1770;
+   tiki(x,floor,walking?t/75+who:0,who?'#ff95c8':'#63e5db',who?-1:1,carry);
+  }
+  if(walking&&t>18500){ /* pause for an unmistakable seven-piece tower */ }
+ }
+ function frame(now){
+  if(!start)start=now;
+  render(now-start);
+  raf=requestAnimationFrame(frame);
+ }
+ function visibility(){
+  cancelAnimationFrame(raf);
+  if(reduce.matches){render(7*2600-100);return;}
+  if(!document.hidden){start=0;raf=requestAnimationFrame(frame);}
+ }
+ document.addEventListener('visibilitychange',visibility);
+ reduce.addEventListener('change',visibility);
+ window.addEventListener('resize',()=>{if(reduce.matches)render(7*2600-100);});
+ visibility();
+})();
+</script></body></html>
