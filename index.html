@@ -252,7 +252,7 @@ body[data-theme="miami"]:before,body[data-theme="nordic"]:before{background-size
 </style></head><body data-theme="miami"><header id="home" class="wrap top"><a class="brand" href="#home"><b>MD</b> Michael L. DeMarco</a><div class="theme-switcher" role="group" aria-label="Website appearance"><button type="button" id="theme-nordic" aria-pressed="false">☀ Nordic Calm</button><button type="button" id="theme-miami" aria-pressed="true">✦ Miami Neon</button></div><nav><a href="#work">Selected work</a><a href="#ventures">Ventures</a><a href="#profile">My story</a><a href="#contact">Contact</a></nav></header>
 <main><section class="wrap hero"><canvas class="coastal-scene" aria-hidden="true"></canvas><div><div class="eyebrow">A personal portfolio · A continuing body of work</div><h1>Michael L.<br><em>DeMarco.</em></h1><p class="lead">Vision, practical skill and determination—expressed through design, construction documentation, project delivery and digital innovation. I build ideas into useful work, connect disciplines and keep moving forward.</p><div class="actions"><a class="btn primary" href="#work">Explore selected work</a><a class="btn" href="#contact-form">Start a conversation</a></div><div class="chat-social-bar hero-social-links" aria-label="Connect with Michael L. DeMarco"><img src="assets/michael-chat-profile.svg" alt="Michael L. DeMarco profile portrait" width="44" height="44"><a href="https://www.facebook.com/LUCIANMDEMARCO" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">Facebook</a><a href="https://www.instagram.com/calibrationcorp/" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">Instagram</a><a class="social-whatsapp" href="https://wa.me/17325567388" target="_blank" rel="noopener noreferrer" aria-label="Chat with Michael on WhatsApp">WhatsApp</a></div></div><div class="visual orbit-visual">
   <svg class="orbit-scene" viewBox="0 0 440 250" role="img" aria-labelledby="hero-orbit-title">
-    <title id="hero-orbit-title">Imagined Sun and Moon orbits around Earth, with glowing lunar cities facing outward and three spacecraft escorting a mothership</title>
+    <title id="hero-orbit-title">Imagined Sun and Moon orbits around Earth, with glowing lunar cities facing outward a mothership with escorts, and alien shuttles flying between the Moon and Earth</title>
     <defs>
       <radialGradient id="orbit-earth-fill" cx="32%" cy="27%" r="75%">
         <stop stop-color="#77dbff"/><stop offset=".57" stop-color="#1978bc"/><stop offset="1" stop-color="#143d73"/>
@@ -282,6 +282,12 @@ body[data-theme="miami"]:before,body[data-theme="nordic"]:before{background-size
         <circle r="23" fill="url(#orbit-sun-fill)" opacity=".16"/>
         <circle r="16" fill="url(#orbit-sun-fill)"/>
       </g>
+      <g id="orbit-alien-shuttle">
+        <ellipse rx="8" ry="4.5" fill="#81ffac" opacity=".3"/>
+        <ellipse rx="6.5" ry="2.7" fill="#395c6d" stroke="#d6ffeb" stroke-width=".8"/>
+        <path d="M-3.2-.7a3.2 3.2 0 0 1 6.4 0z" fill="#a4ffcc"/>
+        <path d="M-3 1h.1m2.9 0h.1m2.9 0h.1" stroke="#caff94" stroke-width="1" stroke-linecap="round"/>
+      </g>
       <g id="orbit-escort">
         <path d="M-8-2h6v4h-6l-5-2z" fill="#55d4ff" opacity=".55"/>
         <path d="M9 0-6 5l2-5-2-5z" fill="#aac8f2" stroke="#eff6ff" stroke-width=".7"/>
@@ -309,6 +315,13 @@ body[data-theme="miami"]:before,body[data-theme="nordic"]:before{background-size
       <g class="orbit-moon-moving" transform="rotate(-45)">
         <animateTransform attributeName="transform" type="rotate" from="-45" to="315" dur="24s" repeatCount="indefinite"/>
         <use href="#orbit-moon" x="76"/>
+        <!-- The shuttles share the Moon's rotating frame so they can land on its moving surface. -->
+        <use href="#orbit-alien-shuttle" aria-hidden="true">
+          <animateMotion path="M 89 -11 C 107 -26 86 -42 64 -35 S 37 -28 26 -18" dur="18s" calcMode="linear" keyPoints="0;0;1;1;0;0" keyTimes="0;.12;.43;.55;.88;1" repeatCount="indefinite"/>
+        </use>
+        <use href="#orbit-alien-shuttle" aria-hidden="true">
+          <animateMotion path="M 89 11 C 107 26 86 42 64 35 S 37 28 26 18" begin="-9s" dur="18s" calcMode="linear" keyPoints="0;0;1;1;0;0" keyTimes="0;.12;.43;.55;.88;1" repeatCount="indefinite"/>
+        </use>
       </g>
       <g class="orbit-moon-still" transform="rotate(-45)">
         <use href="#orbit-moon" x="76"/>
