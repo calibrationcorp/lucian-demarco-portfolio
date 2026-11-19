@@ -12,12 +12,13 @@ body[data-theme="nordic"] .hero .orbit-visual{background:linear-gradient(155deg,
 .orbit-caption{position:absolute;left:0;right:0;bottom:11px;text-align:center;color:#edf0f2;font-size:10px;letter-spacing:.08em}
 .orbit-sun-core{stop-color:var(--sun-gold,#ffea70);animation:sun-core-color 42s ease-in-out infinite}
 .orbit-sun-rim{stop-color:var(--sun-rim,#ff9a48);animation:sun-rim-color 42s ease-in-out infinite}
-.orbit-sun-still{display:none}
+.orbit-sun-still,.orbit-moon-still{display:none}
+.orbit-moon-track{fill:none;stroke:#a5bbdf;stroke-opacity:.35;stroke-dasharray:3 5}
 @keyframes sun-core-color{50%{stop-color:#ffad43}}
 @keyframes sun-rim-color{50%{stop-color:#f46521}}
 @media (prefers-reduced-motion:reduce){
-  .orbit-sun-moving{display:none}
-  .orbit-sun-still{display:inline}
+  .orbit-sun-moving,.orbit-moon-moving{display:none}
+  .orbit-sun-still,.orbit-moon-still{display:inline}
   .orbit-sun-core,.orbit-sun-rim{animation:none}
 }
 </style><style>
@@ -251,7 +252,7 @@ body[data-theme="miami"]:before,body[data-theme="nordic"]:before{background-size
 </style></head><body data-theme="miami"><header id="home" class="wrap top"><a class="brand" href="#home"><b>MD</b> Michael L. DeMarco</a><div class="theme-switcher" role="group" aria-label="Website appearance"><button type="button" id="theme-nordic" aria-pressed="false">☀ Nordic Calm</button><button type="button" id="theme-miami" aria-pressed="true">✦ Miami Neon</button></div><nav><a href="#work">Selected work</a><a href="#ventures">Ventures</a><a href="#profile">My story</a><a href="#contact">Contact</a></nav></header>
 <main><section class="wrap hero"><canvas class="coastal-scene" aria-hidden="true"></canvas><div><div class="eyebrow">A personal portfolio · A continuing body of work</div><h1>Michael L.<br><em>DeMarco.</em></h1><p class="lead">Vision, practical skill and determination—expressed through design, construction documentation, project delivery and digital innovation. I build ideas into useful work, connect disciplines and keep moving forward.</p><div class="actions"><a class="btn primary" href="#work">Explore selected work</a><a class="btn" href="#contact-form">Start a conversation</a></div><div class="chat-social-bar hero-social-links" aria-label="Connect with Michael L. DeMarco"><img src="assets/michael-chat-profile.svg" alt="Michael L. DeMarco profile portrait" width="44" height="44"><a href="https://www.facebook.com/LUCIANMDEMARCO" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">Facebook</a><a href="https://www.instagram.com/calibrationcorp/" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">Instagram</a><a class="social-whatsapp" href="https://wa.me/17325567388" target="_blank" rel="noopener noreferrer" aria-label="Chat with Michael on WhatsApp">WhatsApp</a></div></div><div class="visual orbit-visual">
   <svg class="orbit-scene" viewBox="0 0 440 250" role="img" aria-labelledby="hero-orbit-title">
-    <title id="hero-orbit-title">Illustration of the Sun orbiting Earth on an elliptical path</title>
+    <title id="hero-orbit-title">Imagined Sun and Moon orbits around Earth, with glowing lunar cities always facing away from Earth</title>
     <defs>
       <radialGradient id="orbit-earth-fill" cx="32%" cy="27%" r="75%">
         <stop stop-color="#77dbff"/><stop offset=".57" stop-color="#1978bc"/><stop offset="1" stop-color="#143d73"/>
@@ -259,6 +260,24 @@ body[data-theme="miami"]:before,body[data-theme="nordic"]:before{background-size
       <radialGradient id="orbit-sun-fill" cx="38%" cy="34%" r="66%">
         <stop class="orbit-sun-core"/><stop class="orbit-sun-rim" offset="1"/>
       </radialGradient>
+      <linearGradient id="orbit-moon-fill">
+        <stop stop-color="#dce7f2"/><stop offset=".54" stop-color="#8197b2"/><stop offset=".57" stop-color="#293653"/><stop offset="1" stop-color="#131a30"/>
+      </linearGradient>
+      <g id="orbit-moon">
+        <circle r="19" fill="#82a5e8" opacity=".15"/>
+        <circle r="16" fill="url(#orbit-moon-fill)" stroke="#a3b7d5" stroke-width=".7"/>
+        <g fill="#68819e" opacity=".6">
+          <circle cx="-8" cy="-6" r="3"/><circle cx="-5" cy="7" r="3.6"/><circle cx="-11" cy="2" r="1.5"/>
+        </g>
+        <!-- The city clusters sit on the outward half of the Moon. -->
+        <g fill="#ffad50" opacity=".34">
+          <circle cx="7" cy="-7" r="5"/><circle cx="10" cy="3" r="5"/><circle cx="5" cy="9" r="4"/>
+        </g>
+        <g fill="none" stroke="#ffc871" stroke-width=".55">
+          <path d="M4-6h7m-5-4v7m3-6v6M7 2h7m-5-3v7m3-6v5M3 9h6m-4-3v6m2-5v4"/>
+        </g>
+        <path fill="none" stroke="#fff0ba" stroke-width="1.7" stroke-linecap="round" d="M6-8h.1m3 3h.1m1 8h.1m2-2h.1M5 9h.1m2 2h.1"/>
+      </g>
       <g id="orbit-sun">
         <circle r="23" fill="url(#orbit-sun-fill)" opacity=".16"/>
         <circle r="16" fill="url(#orbit-sun-fill)"/>
@@ -272,6 +291,14 @@ body[data-theme="miami"]:before,body[data-theme="nordic"]:before{background-size
       <use class="orbit-sun-still" href="#orbit-sun" x="153"/>
     </g>
     <g transform="translate(220 125)">
+      <circle r="76" class="orbit-moon-track"/>
+      <g class="orbit-moon-moving" transform="rotate(-45)">
+        <animateTransform attributeName="transform" type="rotate" from="-45" to="315" dur="24s" repeatCount="indefinite"/>
+        <use href="#orbit-moon" x="76"/>
+      </g>
+      <g class="orbit-moon-still" transform="rotate(-45)">
+        <use href="#orbit-moon" x="76"/>
+      </g>
       <circle r="39" fill="#55c9ff" opacity=".14"/>
       <circle r="34" fill="url(#orbit-earth-fill)" stroke="#a2e7ff" stroke-opacity=".7"/>
       <path fill="#9cdb8e" d="M-25-13l7-9 12-3 7 5-5 5-7 2-4 7 6 5-3 4-7-6-6-3z M-8 3l9 1 8 8-4 7-5 9-4-5-1-10z M8-19l12-2 7 7 2 9-8 3-2 9-7 1-6-10 3-6-5-4z M20 15l7-4 4 6-6 6-7-3z"/>
