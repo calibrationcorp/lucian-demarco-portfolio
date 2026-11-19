@@ -537,40 +537,99 @@ if(!sessionStorage.getItem('promo-dismissed'))setTimeout(()=>{modal.hidden=false
   }
   context.restore();
  }
- function drawCoconuts(time,color){
-  const cycle=7600;
-  const coconuts=[
-   {start:500,delay:0,x:663,top:145,ground:646,size:7},
-   {start:1800,delay:2100,x:681,top:163,ground:571,size:6},
-   {start:3900,delay:4100,x:191,top:251,ground:646,size:5}
-  ];
+ // Three trips per collector build a six-coconut pyramid at the right palm.
+ const collectors = [
+  {landing:219, crownY:251, dock:849, accent:'#66dcd1', offset:0},
+  {landing:678, crownY:145, dock:903, accent:'#ff967c', offset:1350}
+ ];
+ const stackSlots = [[-17,0],[17,0],[0,0],[-8.5,-15],[8.5,-15],[0,-30]];
+ const trip = 5600, collapse = 3*trip + 1000, loop = collapse + 3200;
+ const clamp = value => Math.max(0,Math.min(1,value));
+ function oval(x,y,rx,ry,fill,angle=0){
+  context.beginPath();
+  context.ellipse(x,y,rx,ry,angle,0,2*Math.PI);
+  context.fillStyle=fill;
+  context.fill();
+ }
+ function coconut(x,y,spin,color,aspect){
   context.save();
-  for (const nut of coconuts){
-   const age=((time-nut.start+cycle*200)%cycle);
-   const fall=Math.max(0,age-nut.delay);
-   // A coconut releases, falls under gravity, bounces softly and rests near roots.
-   const duration=1150;
-   const t=Math.min(1,fall/duration);
-   let y=nut.top+(nut.ground-nut.top)*t*t;
-   if(fall>duration && fall<duration+650){
-    const bounce=(fall-duration)/650;
-    y=nut.ground-25*Math.sin(Math.PI*bounce)*(1-bounce);
-   }
-   const visible=age<nut.delay+duration+1800;
-   if(!visible)continue;
-   const x=nut.x+Math.sin(Math.min(fall,1300)/480)*12;
-   context.beginPath();
-   context.arc(x,y,nut.size,0,Math.PI*2);
-   context.fillStyle='#9e6a43';
-   context.globalAlpha=.88;
-   context.shadowColor=color;
-   context.shadowBlur=9;
-   context.fill();
-   context.strokeStyle=color;
-   context.lineWidth=1.1;
-   context.stroke();
-  }
+  context.translate(x,y);
+  context.scale(aspect,1);
+  context.rotate(spin);
+  oval(0,0,8.6,8,'#66422d');
+  context.lineWidth=1.3;
+  context.strokeStyle=color;
+  context.stroke();
+  oval(-2,-2,3.6,1.3,'#c99865',-.45);
+  for(const [a,b] of [[2,-3],[4,-1],[1,0]]) oval(a,b,1,1,'#34251e');
   context.restore();
+ }
+ function collector(x,y,direction,stride,accent,carrying,aspect){
+  context.save();
+  context.translate(x,y);
+  context.scale(direction*aspect,1);
+  const step=Math.sin(stride);
+  oval(-7-step*4,-3-Math.max(0,step)*3,5,3,'#d69861');
+  oval(7+step*4,-3-Math.max(0,-step)*3,5,3,'#edb980');
+  context.translate(0,-Math.abs(step)*2.5);
+  oval(0,-16,12,12,'#875438');
+  for(let leaf=-2;leaf<=2;leaf++) oval(leaf*4,-10,2.8,5.3,accent,-leaf*.10);
+  oval(-12,-18+step*3,3.8,5,'#bd8155');
+  oval(0,-30,15,14,'#53352b');
+  oval(1,-29,13,11,'#bb8054');
+  oval(-3,-43,3,7,accent,-.65);
+  oval(3,-44,3,6,'#b5e785',.5);
+  for(const eye of [-4,7]){
+   oval(eye,-31,3.4,4.1,'#fff3d1');
+   oval(eye+1,-31,1.8,2.6,'#342c30');
+   oval(eye+1.5,-32,0.7,.8,'white');
+  }
+  oval(-8,-26,2.7,1.4,'#f2a48b');
+  context.strokeStyle='#462b29';context.lineWidth=1.4;
+  context.beginPath();context.arc(2,-26,3,0,Math.PI);context.stroke();
+  oval(carrying?13:11+step*4,carrying?-19:-15-step*3,4,3.6,'#edb486');
+  context.restore();
+ }
+ function drawCoconuts(time,color){
+  const t=time%loop;
+  const ground=640;
+  const aspect=Math.max(.7,Math.min(2.2,(canvas.height/650)/(canvas.width/1200)));
+  const pileX=876;
+  collectors.forEach(({landing,crownY,dock,accent,offset},who)=>{
+   let actorX=dock, facing=who? -1:1, stride=0, carried=null;
+   for(let run=0;run<3;run++){
+    const index=run*2+who;
+    const age=t-run*trip-offset;
+    if(age<0) continue;
+    const walkOut=clamp((age-250)/1900);
+    const walkBack=clamp((age-2250)/2350);
+    const homeTrip=clamp((age-4950)/500);
+    const [dx,dy]=stackSlots[index];
+    const stackX=pileX+dx*aspect, stackY=ground-8+dy;
+    const pickup=landing+13*aspect;
+    const drop=stackX-13*aspect;
+    const x=dock+(pickup-dock)*walkOut+(drop-pickup)*walkBack+(dock-drop)*homeTrip;
+    const running=(walkOut>0&&walkOut<1)||(walkBack>0&&walkBack<1)||(homeTrip>0&&homeTrip<1);
+    const step=running?age/84:0;
+    actorX=x;stride=step;facing=age<2250?-1:age<4950?1:Math.sign(dock-drop)||1;
+    if(age<2150){
+     const f=clamp(age/1350), bounce=clamp((age-1350)/550);
+     coconut(landing-7*(1-f),crownY+(ground-8-crownY)*f*f-19*Math.sin(Math.PI*bounce)*(1-bounce),f*.9,color,aspect);
+    }else if(age<4950){
+     const lift=clamp((age-2150)/100), place=clamp((age-4600)/350);
+     const nutX=age<2250?landing+26*aspect*lift:x+13*aspect;
+     carried=[nutX,ground-8-12*lift+(stackY-ground+20)*place-Math.abs(Math.sin(step))*2.5];
+    }else{
+     const roll=Math.max(0,(t-collapse-(5-index)*105)/1000);
+     const distance=roll*80+roll*roll*165;
+     const fall=clamp(roll*3.6);
+     const y=stackY-dy*fall*fall-9*Math.abs(Math.sin(roll*10))*Math.max(0,1-roll);
+     if(stackX+distance<1225)coconut(stackX+distance,y,.9+distance/(8*aspect),color,aspect);
+    }
+   }
+   collector(actorX,ground,facing,stride,accent,!!carried,aspect);
+   if(carried)coconut(...carried,.9,color,aspect);
+  });
  }
  function drawSeagulls(time,color){
   const birds=[
